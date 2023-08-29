@@ -3,16 +3,14 @@
     <section class="greetings">
       <h1>السلام عليكم ورحمة الله وبركاته</h1>
       <h1>Welcome to Tanzeel</h1>
-
     </section>
-    
+  
     <section class="prayer-times">
       <div class="salah-time">
         <h1>Prayer Times</h1>
         <ul>
           <li v-for="(time, prayer) in prayerTimes" :key="prayer">
             {{ prayer }}: {{ time }}
-            {{ console.log(prayer, time) }}
           </li>
         </ul>
       </div>
@@ -28,10 +26,8 @@
   </div>
 </template>
 
-
 <script>
-
-import prayerTimeService from '@/services/PrayerTimeService'
+import { getPrayerTimes } from '@/services/PrayerTimeService';
 
 export default {
   data() {
@@ -41,22 +37,17 @@ export default {
   },
   async mounted() {
     try {
-      const position = await this.getGeolocation();
-      const response = await prayerTimeService(
-        position.coords.latitude,
-        position.coords.longitude,
-        3 // Method value
-      );
-      this.prayerTimes = response.data.timings;
+      const currentDate = this.getCurrentDate(); // Get current date in YYYY-MM-DD format
+      const timings = await getPrayerTimes(currentDate);
+      this.prayerTimes = timings;
     } catch (error) {
       console.error('Error fetching prayer times:', error);
     }
   },
   methods: {
-    getGeolocation() {
-      return new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(resolve, reject);
-      });
+    getCurrentDate() {
+      const now = new Date();
+      return now.toISOString().slice(0, 10);
     },
   },
 };
