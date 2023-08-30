@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <SalahTimes msg="Welcome to Your Vue.js App"/>
+    <prayerTimes msg="Welcome to Your Vue.js App"/>
   </div>
 
 </template>
 
 <script>
-import SalahTimes from './components/SalahTimes.vue'
+import prayerTimes from './components/prayerTimes.vue'
   
 export default {
   name: 'app',
   components: {
-    SalahTimes,
+    prayerTimes,
   }
 }
 </script>

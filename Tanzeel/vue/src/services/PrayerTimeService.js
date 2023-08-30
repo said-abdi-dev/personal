@@ -1,21 +1,17 @@
+// src/services/PrayerTimeService.js
 import axios from 'axios';
 
-const API_KEY = '0fe371429dmsh4efb3bc2fedf3bbp1ac14ejsn292a99d6a1b8';
-const API_HOST = 'aladhan.p.rapidapi.com';
+const API_BASE_URL = 'http://api.aladhan.com/v1';
 
-export async function getPrayerTimes(date) {
-  const options = {
-    method: 'GET',
-    url: `http://api.aladhan.com/v1/timingsByCity/${date}`,
-    params: {
-      city: 'auto', // Automatically fill the city based on location
-    },
-    headers: {
-      'X-RapidAPI-Key': API_KEY,
-      'X-RapidAPI-Host': API_HOST,
-    },
-  };
-
-const response = await axios.request(options);
-  return response.data.timings;
-}
+export default {
+  getPrayerTimesByDate: async (date, city, country, method) => {
+    const response = await axios.get(`${API_BASE_URL}/timingsByCity/${date}`, {
+      params: {
+        city,
+        country,
+        method,
+      },
+    });
+    return response.data.data.timings;
+  },
+};
