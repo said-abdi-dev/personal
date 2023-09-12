@@ -43,8 +43,8 @@
     <section class="footer" id="footer">
       <div class="creator-info">
         <p>Created by: Said Abdi</p>
-        <p>LinkedIn: <a href="https://www.linkedin.com/in/said-abdi-dev/" target="_blank">Said Abdi</a></p>
-        <p>GitHub: <a href="https://github.com/said-abdi-dev" target="_blank">said-abdi-dev</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/said-abdi-dev/" target="_blank"></a></p>
+        <p>GitHub: <a href="https://github.com/said-abdi-dev" target="_blank"></a></p>
       </div>
     </section>
   </div>
@@ -53,6 +53,7 @@
 <script>
 import PrayerTimeService from '@/services/PrayerTimeService';
 import GoogleGeocodingService from '@/services/GoogleGeocodingService';
+import AdhanTimeService from '../services/AdhanTimeService';
 
 export default {
   props: {
@@ -128,10 +129,21 @@ export default {
       const ampm = parseInt(hour24, 10) < 12 ? 'AM' : 'PM';
       return `${hour12}:${minute} ${ampm}`;
     },
-    fetchPrayerTimes() {
+    async fetchPrayerTimes() {
       const { city, country } = this.location;
-      // Implement your fetch prayer times logic here based on the selected location (city and country).
-      // Update this.prayerTimes with the new data.
+
+      const currentDate = new Date();
+      const year  = currentDate.getFullYear();
+      const month = currentDate.getMonth() + 1;
+
+      try { 
+        const todayPrayerTime = await AdhanTimeService(city,country,year,month);
+
+        this.prayerTimes = todayPrayerTime;
+      } catch(error) {
+        console.error('Error fetching prayer times:', error);
+      }
+      
     },
   },
 };
