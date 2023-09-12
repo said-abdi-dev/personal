@@ -7,7 +7,7 @@
   
     <section class="prayer-times" id="prayer-times">
       <div class="salah-time">
-        <h1>Prayer Times</h1>
+        <h1 class="prayer-time-title" >Prayer Times</h1>
         <ul>
           <li v-for="(time, prayer) in prayerTimes" :key="prayer">
             {{ prayer }}: {{ time }}
@@ -110,14 +110,13 @@ export default {
 
 <style scoped>
 .home {
-  background-color: #040D12;
+  background-color: #024422;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0;
-  padding: 0;
+
 }
 
 h1 {
@@ -134,7 +133,9 @@ ul li {
 
 .footer {
   background-color: #24a3e7;
-  padding: 20px 0;
+}
+.prayer-time-title {
+  font-size: 24px;
 }
 
 .creator-info p {
@@ -150,6 +151,7 @@ ul li {
 }
 
 .arabic-greeting {
+  font-size: 20px;
   animation: slideIn 1s ease-in-out;
 }
 
