@@ -1,6 +1,20 @@
 <template>
   <div class="prayer-times-container">
     <h1 class="city-name">{{ cityName }}</h1>
+
+    <!-- Location selection section -->
+    <section class="location-selection">
+      <h2>Select Location</h2>
+      <div class="location-form">
+        <label for="city">City:</label>
+        <input type="text" id="city" v-model="location.city" placeholder="Enter city">
+        
+        <label for="country">Country:</label>
+        <input type="text" id="country" v-model="location.country" placeholder="Enter country">
+        
+        <button @click="fetchPrayerTimes">Get Prayer Times</button>
+      </div>
+    </section>
     
     <!-- Prayer times section -->
     <div class="prayer-time-card">
@@ -24,19 +38,7 @@
       <div class="prayer-time">{{ formatTimeTo12HourClock(prayerTimes.Isha) }}</div>
     </div>
     
-    <!-- Location selection section -->
-    <section class="location-selection">
-      <h2>Select Location</h2>
-      <div class="location-form">
-        <label for="city">City:</label>
-        <input type="text" id="city" v-model="location.city" placeholder="Enter city">
-        
-        <label for="country">Country:</label>
-        <input type="text" id="country" v-model="location.country" placeholder="Enter country">
-        
-        <button @click="fetchPrayerTimes">Get Prayer Times</button>
-      </div>
-    </section>
+  
     <!--Foooter section -->
     <section class="footer" id="footer">
       <div class="creator-info">
@@ -146,6 +148,7 @@ export default {
   border-radius: 8px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
   text-align: center;
+  margin-bottom: 100px;
 }
 
 .city-name {
@@ -215,9 +218,10 @@ button:hover {
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: red;
+  background-color: #5C8374;
   color: white;
   text-align: center;
+  z-index: 3; /* Ensure the footer is behind the main content */
 }
 </style>
 
