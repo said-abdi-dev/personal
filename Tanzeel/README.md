@@ -1,5 +1,8 @@
-# Final Capstone
-​
-This directory contains all of the starter projects for the final capstone.
-​
-Each project contains instructions that provides information about the starting code and explains how to get started with the final capstone project.
+# Tanzeel - Prayer Times Application
+
+Tanzeel is a Vue.js web application that provides users with accurate prayer times based on their location. This application fetches prayer times from an external API and displays them in a user-friendly format.
+
+### Technologies Used
+Vue.js,
+Geolocation API,
+Prayer Times API
